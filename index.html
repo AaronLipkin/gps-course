@@ -1,0 +1,531 @@
+<script type="importmap">
+  {
+    "imports": {
+      "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+    }
+  }
+</script>
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      html {
+        background-color: #131b1e;
+        color: white;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: Lora;
+      }
+      p {
+        font-family: Nunito;
+      }
+      .btn {
+        background-color: #31874e;
+      }
+      form {
+        background-color: #131b1e;
+        padding: 2rem;
+      }
+      .bg-brand-green {
+        background-color: #31874e !important;
+      }
+      .border-brand-green {
+        border-color: #31874e !important;
+      }
+      .green-text {
+        color: #31874e !important;
+      }
+      .hs-form-field {
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+      label {
+        font-family: Nunito;
+        color: white;
+        font-size: 0.75rem;
+      }
+      input {
+        color: white !important;
+        width: 100%;
+        background-color: #0f1517;
+        padding: 0.5rem !important;
+        font-size: 0.75rem;
+        margin-top: 0.25rem !important;
+      }
+      .hs-button {
+        font-family: Nunito;
+        display: inline-block;
+        background-color: #31874e !important;
+        color: white;
+        border-radius: 1000px;
+        padding: 0.5rem 1.5rem;
+        font-size: 0.75rem;
+        margin-top: 1rem;
+      }
+      .bg-green-gradient {
+        background-image: radial-gradient(#27ae60bf 17%, #114c2a 80%);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="pb-16">
+      <div
+        class="w-full bg-cover py-16 md:py-32"
+        style="
+          background-image: url('https://ferrocity.com/wp-content/uploads/2024/03/Group-1.jpg');
+        "
+      >
+        <h1 class="text-center text-7xl">Guide to Production Success</h1>
+      </div>
+      <div class="container px-8 mt-12 mx-auto pb-12 flex flex-col md:flex-row">
+        <div class="w-full">
+          <h3 class="w-full text-white pb-2 mb-2 text-3xl">Course Overview</h3>
+          <p class="text-sm text-white leading-normal font-light">
+            Whether you’re an early career professional looking to get into the
+            production industry or an established veteran looking to make a
+            career change, this course has something to offer everyone.  You’ll
+            learn the the right type of people to surround yourself with and the
+            proper mindset to adopt at the outset; the importance of embracing
+            change and the need to evaluate your current skill set;
+            understanding your potential employer and ways to switch career
+            paths; what happens when you get stuck in a job; the essential
+            qualities for success and much more!  Joe goes through each lesson
+            carefully step by step, and talks to you like you’re hanging out
+            backstage at a gig without the traditional classroom formality –
+            Just get ready to make some lists!  “Creativity takes courage,” as
+            Joe likes to say, so there’s no time to waste. 
+          </p>
+          <div class="flex mt-8 items-center text-white">
+            <img
+              src="https://i.imgur.com/5EtvUkY.jpeg"
+              class="hidden md:block w-32 h-auto flex-shrink-0"
+              alt=""
+            />
+            <div class="md:pl-8">
+              <div class="text-xs font-black uppercase">About the Guide</div>
+              <h4 class="text-4xl">Joe Scacciaferro</h4>
+              <p class="mt-4 text-sm leading-5">
+                Joe Scacciaferro's career is a testament to his exceptional
+                blend of music, technology, and multimedia expertise. Starting
+                as a musician in the vibrant club scenes of New York City and
+                New Jersey, Joe later ventured into video production after
+                producing a song performed by Ray Charles in a music video
+                dedicated to his daughter with Down Syndrome. He founded Ferro
+                Productions, excelling in documentaries, live broadcasts, and
+                music scoring. His work thus far has earned him five Emmys and
+                nine nominations and two Super Bowl rings.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container px-8 mx-auto">
+        <div class="" v-for="(chapterItem, index) of chapters">
+          <h2 class="text-3xl mt-8">Chapter {{index + 1}}</h2>
+          <div
+            v-for="(chapter, index) of chapterItem"
+            class="border-b border-solid border-white"
+          >
+            <div class="flex items-center justify-between py-4">
+              <div
+                class="mr-4 cursor-pointer"
+                @click="
+                  chapter.show = !chapter.show;
+                  $forceUpdate();
+                "
+              >
+                <svg
+                  class="w-4 h-4"
+                  viewBox="0 0 30 29"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path v-if="!chapter.show" d="M15 0V28.5" stroke="white" />
+                  <path d="M29.25 14.25L0.75 14.25" stroke="white" />
+                </svg>
+              </div>
+              <div class="md:flex items-center mr-auto">
+                <h4
+                  class="font-light text-xs md:text-base whitespace-nowrap mr-2"
+                >
+                  Lesson {{index + 1}}:
+                </h4>
+                <h4
+                  class="font-light text-base mr-auto"
+                  v-html="chapter.name"
+                ></h4>
+              </div>
+            </div>
+            <div
+              v-if="chapter.show"
+              class="flex flex-col md:flex-row pt-t pb-8"
+            >
+              <div class="w-full md:w-2/3">
+                <div class="" v-html="chapter.searcheeEmbed"></div>
+              </div>
+              <div
+                class="flex flex-col md:pl-8 w-full md:w-1/3 no-video"
+                v-html="chapter.content"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script type="module">
+  import { createApp } from "vue";
+
+  createApp({
+    data() {
+      return {
+        message: "Hello Vue!",
+        chapters: [
+          [
+            {
+              order: "1",
+              show: true,
+              name: "Surround yourself with people with Vision",
+              content:
+                '<p>Here, Joe Scacciaferro shares with you the importance of ensuring you are surrounded by people with creative vision and intelligence.</p>\n<p>You&#8217;ll learn how to find these people and evaluate them to ensure they can help you&#8217;re growth.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/47NJXxbm2o/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/47NJXxbm2o/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "2",
+              name: "Planners &amp; Doers",
+              content:
+                '<p>Here, Joe Scacciaferro explains the terms &#8216;planners&#8217; and &#8216;doers&#8217; in regards to production. You&#8217;ll learn the meaning of the terms, the importance of each in the production process, and how to identify persons that match each description.</p>\n<p>In addition, Joe reminds you of the importance of trusting your instincts and common sense when working.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/ZxN3Ym0y20/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/ZxN3Ym0y20/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "3",
+              name: "Surround yourself with Experience",
+              content:
+                '<p>Here, Joe Scacciaferro teaches you the need to be around experienced and successful people throughout the production process.</p>\n<p>You&#8217;ll be encouraged to learn from each person involved because there&#8217;s something to be taught from everyone.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/gRqmvaWW21/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/gRqmvaWW21/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "4",
+              name: "Surround yourself with New Ideas",
+              content:
+                '<p>Here, Joe Scacciaferro shares with you the importance of being around new ideas.</p>\n<p>You&#8217;ll learn this doesn&#8217;t just come from experienced professionals but young people and those who don&#8217;t think.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/Xwqjad8gN7/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/Xwqjad8gN7/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "5",
+              name: "Stay in Motion",
+              content:
+                '<p>Here, Joe Scacciaferro shares with you one of his favorite lessons &#8211; staying in motion and trying different things. You&#8217;ll learn to continually take information you learn and apply it in new settings while never giving up.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/y8qrbYEKqL/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/y8qrbYEKqL/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "6",
+              name: "Don&#8217;t Wait",
+              content:
+                '<p>Here, Joe Scacciaferro encourages you not to wait for the right person or position to come to you.</p>\n<p>You&#8217;ll learn the importance of being proactive and taking the initiative to pursue opportunities for success.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/WP2EJK10DR/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/WP2EJK10DR/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "7",
+              name: "Volunteer",
+              content:
+                '<p>Here, Joe Scacciaferro explains to you the overlooked value of volunteering for certain positions.</p>\n<p>You&#8217;ll learn the right time to take certain gigs for free or lesser pay.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/AYDab35wNQ/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/AYDab35wNQ/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "8",
+              name: "Take Positions Beyond Reach",
+              content:
+                '<p>Here, Joe Scacciaferro explains to you when to take positions that are above your current skill set.</p>\n<p>You&#8217;ll learn how and when this is possible while always being aware of the risk involved.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/W6NMd7mrDZ/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/W6NMd7mrDZ/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "9",
+              name: "Read, Listen, and Experiment",
+              content:
+                '<p>Here, Joe Scacciaferro encourages you to use your time to invest in learning new techniques.</p>\n<p>You&#8217;ll learn the new to utilize your time and energy into your skill development in different areas for growth.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/3w2VAbKeqM/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/3w2VAbKeqM/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "10",
+              name: "Rejection",
+              content:
+                '<p>Here, Joe Scacciaferro talks to you about rejection in the entertainment production industry.</p>\n<p>You&#8217;ll learn the importance of not taking it personally since it happens all the time in an outcome driven business.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/YxDWApY4qg/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/YxDWApY4qg/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "11",
+              name: "Believe in Yourself",
+              content:
+                '<p>Here, Joe Scacciaferro encourages you to have confidence in your abilities.</p>\n<p>Regardless of where you currently are or can do, you&#8217;ll learn not to be discouraged but to continually build on what you know and can do.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/P524YmyED1/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/P524YmyED1/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "12",
+              name: "Embrace the Concept",
+              content:
+                '<p>Here in this final video, Joe Scacciaferro explains the importance of embracing the material covered thus far and putting it into action for your own personal growth and success. Thank you for watching!</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/lVNOOMPANG/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/lVNOOMPANG/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+          ],
+          [
+            {
+              order: "1",
+              name: "Why a Journal",
+              content:
+                '<p>Here, Joe Scacciaferro discusses the importance of keeping and recording information in a journal for your professional growth. You&#8217;ll learn what to record and when to do so.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/ekqkVGaMN4/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/ekqkVGaMN4/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "2",
+              name: "List of Top 7 Ways to Notice Change Pt. 1",
+              content:
+                '<p>Here, Joe Scacciaferro shares with you his best ways of noticing change. Drawing upon his own experience and history, Joe gives you examples of things to record and why.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/ZgNZAzLdDd/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/ZgNZAzLdDd/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "3",
+              name: "List of Top 7 Ways to Notice Change Pt. 2",
+              content:
+                '<p>Here, Joe Scacciaferro continues the topic from the previous lesson on ways of noticing change. You&#8217;ll learn the need to stay in touch with younger people for ideas, being aware of early trends, locating their origin, connecting with people involved in trends, finding out how it&#8217;s produced, and how you can contribute.</p>\n<h4>Lesson Links</h4>\n&#8211; <a href="https://us.moleskine.com/reporter-notebook/p0435" target="_blank" rel="noopener noreferrer">Moleskine Reporters Pad</a><br>\n&#8211; <a href="https://answerthepublic.com" target="_blank" rel="noopener noreferrer">Identifying Trends Resources</a><br>\n&#8211; <a href="https://alltop.com" target="_blank" rel="noopener noreferrer">AllTop</a><br>\n&#8211; <a href="https://buzzsumo.com" target="_blank" rel="noopener noreferrer">Buzzsumo</a><br>\n&#8211; <a href="https://www.visualthesaurus.com/landing/?ad=shareasale&amp;utm_campaign=VT&amp;utm_source=shareasale&amp;utm_medium=default" target="_blank" rel="noopener noreferrer">Visual Thesaurus</a><br>\n&#8211; <a href="https://www.wordtracker.com/?fpr=leesa55" target="_blank" rel="noopener noreferrer">WordTracker</a><br>\n&#8211; <a href="https://trends.google.com/trends/?geo=US" target="_blank" rel="noopener noreferrer">GoogleTrends</a>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/M32gaXZYNo/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/M32gaXZYNo/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "4",
+              name: "Up Close and Personal",
+              content:
+                '<p>Here, Joe Scacciaferro explains the need for you to be involved with the creative process wherever and whenever it occurs. You&#8217;ll receive examples from television and Broadway shows and wedding photographers and ways to approach the people involved to learn from them; programs to watch for and why; and materials to read for idea generation.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/OpN09k0Yqa/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/OpN09k0Yqa/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "5",
+              name: "Self Inventory",
+              content:
+                '<p>Here, Joe Scacciaferro discusses the importance of making an honest self-inventory. You&#8217;ll receive a guide of questions to aid you in this &#8220;self-scout.&#8221; Get ready to make some lists!</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/R1q18moVNP/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/R1q18moVNP/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "6",
+              name: "Capitalize on your Scout",
+              content:
+                '<p>Here in this final video, Joe Scacciaferro teaches you how to make the most of the self-scout you previously conducted. You&#8217;ll receive an outline of guiding questions to help you make the most of your current abilities and how they can be used. And yes &#8211; get ready to make another list! Thank you for watching!</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/xrq89mdr23/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/xrq89mdr23/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+          ],
+          [
+            {
+              order: "1",
+              name: "Potential Employer",
+              content:
+                '<p>Here, Joe Scacciaferro shares with you what your potential employers are really looking for: skills. You&#8217;ll also learn the need to collect both skills and knowledge in your educational journey because both will give you options for your career.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/Yl2P45YV2L/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/Yl2P45YV2L/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "2",
+              name: "Who&#8217;s got the Goods",
+              content:
+                '<p>Here, Joe Scacciaferro explains the need to learn the right skills from the right people. You&#8217;ll learn to discern if what you are learning is not only accurate but currently valuable.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/mpqz16v9NK/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/mpqz16v9NK/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "3",
+              name: "Shifted Career Paths",
+              content:
+                '<p>Here, Joe Scacciaferro offers advice for changing career paths. Drawing upon his own experience in changing not only jobs but different industries, Joe gives you time-tested methods for placing you in the best position for success.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/OVqwp6w02r/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/OVqwp6w02r/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "4",
+              name: "Can Learning Misinformation be Harmful",
+              content:
+                '<p>Here in this final video, Joe Scacciaferro reminds you that learning everything is helpful for your professional development. Whether it&#8217;s inaccurate information or learning from the mistakes of others, all information is helpful to you so long as you recognize the kind of information you&#8217;re receiving and it&#8217;s value. Joe teaches you how to evaluate. Thank you for watching!</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/P5qnaKoVNr/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/P5qnaKoVNr/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+          ],
+          [
+            {
+              order: "1",
+              name: "Paying Your Dues",
+              content:
+                '<p>Here, Joe Scacciaferro discusses the meaning of &#8220;paying your dues,&#8221; who determines it, and other related info. You&#8217;ll learn that successful production veterans know how to spot talent (or no talent) and will always appreciate those who take chances on things.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/9oNvkpGjqX/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/9oNvkpGjqX/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "2",
+              name: "Meeting the Right People",
+              content:
+                '<p>Here in this final video, Joe Scacciaferro discusses the situation known as being &#8220;stuck in a job.&#8221; You&#8217;ll learn the need for balance: having a job that sustains you while always striving for the one that fulfills you; the &#8220;trap&#8221; that can happen and how to avoid it; the pressures of life involved in the job process; and much more (including another list!). Thank you for watching!</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/kRD69m0l2Q/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/kRD69m0l2Q/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+          ],
+          [
+            {
+              order: "1",
+              name: "Passion",
+              content:
+                '<p>Here, Joe Scacciaferro discusses the first key quality: passion. You&#8217;ll be introduced to Lisa Marie as an example of someone who embodies passion and learn that without it you won&#8217;t be able to succeed.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/rONAzl97qZ/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/rONAzl97qZ/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "2",
+              name: "Commitment",
+              content:
+                '<p>Here, Joe Scacciaferro discusses the next essential quality: commitment. You&#8217;ll be introduced to Loretta Long (Susan from Sesame Street) and learn how to implement this indispensable trait.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/84qBJdpoqj/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/84qBJdpoqj/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "3",
+              name: "Patience",
+              content:
+                '<p>Here, Joe Scacciaferro discusses the next essential quality: patience. You&#8217;ll be introduced to the team at Creative Dimensions as an example of how patience can bring about a value you didn&#8217;t even know existed yet.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/G6Db0YKyqz/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/G6Db0YKyqz/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "4",
+              name: "Movement",
+              content:
+                '<p>Here, Joe Scacciaferro discusses the final essential quality: movement. You&#8217;ll be introduced to Don Sperling as an example of staying in constant motion as you work towards your desired goal.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/yXq7zm0dNm/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/yXq7zm0dNm/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "5",
+              name: "Summary",
+              content:
+                '<p>Joe Scacciaferro wraps up the course lessons with a final reminder of implementing the key qualities of passion, patience, commitment, and movement. Remember, it&#8217;s unacceptable to miss an opportunity, and your dreams are attainable so don&#8217;t let anyone discourage you. Thank you for watching!</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/Pn2laOA8DO/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/Pn2laOA8DO/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+            {
+              order: "6",
+              name: "Future Pace and Push",
+              content:
+                '<p>Joe shares with you how FerroCity supports and connects all members to opportunities. How FerroCity allows you to share your experiences, create partnerships, gain knowledge and skills, seek jobs, access entrepreneurial services, as well as create media, showcase your work and sell your products and services.</p>\n<style>.searchie-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .searchie-container iframe, .searchie-container object, .searchie-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>\n<iframe loading="lazy" src="https://app.searchie.io/file/3Eq5ZmXR2g/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+              searcheeEmbed:
+                '<iframe loading="lazy" src="https://app.searchie.io/file/3Eq5ZmXR2g/embed" width="560"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
+            },
+          ],
+        ],
+      };
+    },
+  }).mount("#app");
+</script>
+
+<style>
+  .page-enter-active,
+  .page-leave-active {
+    transition: opacity 0.4s;
+  }
+  .page-enter-from,
+  .page-leave-to {
+    opacity: 0;
+    filter: blur(1rem);
+  }
+
+  html {
+    @apply font-sans font-extralight text-white;
+  }
+  .btn {
+    @apply bg-brand-green rounded-full text-sm text-white p-6 py-2 cursor-pointer inline-block;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif font-normal;
+  }
+  h1 {
+    @apply text-3xl md:text-5xl;
+  }
+  h2 {
+    @apply text-4xl;
+  }
+  h3 {
+    @apply text-3xl;
+  }
+  h4 {
+    @apply text-xl;
+  }
+  .centered {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  input[type="checkbox"] {
+    @apply bg-gray-light text-brand-green rounded-full border border-solid border-white;
+  }
+  .container {
+    @apply px-8;
+  }
+  .bg-gray-gradient {
+    background-image: radial-gradient(#0f1517 20%, #131b1e 100%);
+  }
+  input.form-input {
+    @apply w-full rounded bg-gray-dark text-sm;
+  }
+
+  textarea.form-input {
+    @apply w-full rounded bg-gray-dark text-sm;
+  }
+
+  label.form-label {
+    @apply text-xs font-black mb-1 block;
+  }
+
+  .no-video > iframe {
+    display: none;
+  }
+
+  .no-video > p {
+    margin-top: 1.5rem;
+  }
+  iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+</style>
